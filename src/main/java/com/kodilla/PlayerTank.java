@@ -5,19 +5,18 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-import static com.kodilla.MortarCombat.*;
 import static com.kodilla.MortarCombat.root;
 
 public class PlayerTank {
 
-    private Rectangle bodyLower  = new Rectangle();
-    private Rectangle bodyUpper  = new Rectangle();
-    private Circle towerC = new Circle();
-    private Rectangle towerR  = new Rectangle();
-    private Rectangle barrel  = new Rectangle();
-    private  Bullet bullet = new Bullet();
+    private final Rectangle bodyLower  = new Rectangle();
+    private final Rectangle bodyUpper  = new Rectangle();
+    private final Circle towerC = new Circle();
+    private final Rectangle towerR  = new Rectangle();
+    private final Rectangle barrel  = new Rectangle();
+    private final Bullet bullet;
 
-    public PlayerTank(int x, int y, int width, int height) {
+    public PlayerTank(double x, double y, double width, double height) {
 
         bodyLower.setWidth(1.3*width);
         bodyLower.setHeight(height*0.7);
@@ -25,11 +24,10 @@ public class PlayerTank {
         bodyLower.setY(y+height*0.3);
         bodyLower.setFill(Color.BLACK);
 
-        towerC.setCenterX(x+(width/2)+x/10);
+        towerC.setCenterX(x + (width / 2) + (x / 10));
         towerC.setCenterY(y);
         towerC.setRadius(width/4);
         towerC.setFill(Color.BLACK);
-
         bodyUpper.setWidth(width/2);
         bodyUpper.setHeight(towerC.getRadius()*2);
         bodyUpper.setX(x+x/10);
@@ -49,6 +47,9 @@ public class PlayerTank {
         towerR.setY(towerC.getCenterY());
         towerR.setFill(Color.BLACK);
 
+        bullet = new Bullet(barrel.getHeight()/2);
+
+        root.getChildren().add(bullet.getBody());
         root.getChildren().add(barrel);
         root.getChildren().add(towerC);
         root.getChildren().add(towerR);
@@ -58,6 +59,7 @@ public class PlayerTank {
     }
 
     public void move (double speed) {
+
         bodyLower.setX(bodyLower.getX()+speed);
         bodyUpper.setX(bodyUpper.getX()+speed);
         towerC.setCenterX(towerC.getCenterX()+speed);
@@ -66,14 +68,18 @@ public class PlayerTank {
     }
 
     public void tilt (double speed) {
+
         if ((speed>0 && barrel.getRotate()<0 ) || (speed<0 && barrel.getRotate()>-85)) {
             barrel.setRotate(barrel.getRotate() + speed);
         }
     }
 
     public void fire() {
-        bullet.setPosition(500, 500);
-        bullet.show() ;
+
+        bullet.show();
+        Gameplay.setStartX(towerC.getCenterX());
+        Gameplay.setStartY(towerC.getCenterY());
+        Gameplay.setAngle(-barrel.getRotate());
     }
 
     public Bullet getBullet() {
@@ -84,21 +90,19 @@ public class PlayerTank {
         return bodyLower;
     }
 
-    public Rectangle getBodyUpper() {
-        return bodyUpper;
-    }
-
-    public Circle getTowerC() {
-        return towerC;
-    }
-
-    public Rectangle getTowerR() {
-        return towerR;
-    }
-
-    public Rectangle getBarrel() {
-        return barrel;
-    }
+//    public Rectangle getBodyUpper() {
+//        return bodyUpper;
+//    }
+//
+//    public Circle getTowerC() {
+//        return towerC;
+//    }
+//
+//    public Rectangle getTowerR() {
+//        return towerR;
+//    }
+//
+//    public Rectangle getBarrel() { return barrel; }
 
     public Shape getShape() {
         Shape shape = Shape.union(bodyLower, bodyUpper);
