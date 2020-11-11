@@ -10,10 +10,13 @@ import static com.kodilla.MortarCombat.*;
 public class Bullet {
 
     public Circle body = new Circle();
-    public Bullet(double size) {
+
+    public void create(double size) {
+
         body.setRadius(size);
         body.setFill(Color.BLACK);
         hide();
+
     }
 
     public Circle getBody() {

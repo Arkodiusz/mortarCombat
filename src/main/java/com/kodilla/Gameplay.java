@@ -2,7 +2,6 @@ package com.kodilla;
 
 import javafx.application.Platform;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 import static com.kodilla.Ground.*;
 import static com.kodilla.MortarCombat.*;
@@ -12,19 +11,23 @@ import static java.lang.Thread.sleep;
 
 public class Gameplay {
 
-    public static void run(PlayerTank player, double speed) {
-
+    public static void run(Tank player, Tank computer) {
         Runnable updater = () -> {
-            movementOfPlayer(player, speed);
-            bulletBehavior(player.getBullet());
-        };
+                if (started) {
+
+                    movementOfPlayer(player);
+                    movementOfComputer(computer);
+                    bulletBehavior(player.getBullet());
+                    //bulletBehavior(computer.getBullet())
+
+                }
+            };
 
         while (true) {
             try {
                 sleep(25);
             } catch (InterruptedException ex) {
             }
-            // UI update is run on the Application thread
             Platform.runLater(updater);
         }
     }
@@ -33,6 +36,8 @@ public class Gameplay {
     public static double startY = 0;
     public static double time = 0;
     public static double angle = 0;
+
+    private static final double speed = 1.5;
 
     public static void setStartX(double startX) {
         Gameplay.startX = startX;
@@ -44,13 +49,12 @@ public class Gameplay {
         Gameplay.angle = angle;
     }
 
-    private static void movementOfPlayer(PlayerTank player, double speed) {
-        Shape shape = player.getShape();
+    private static void movementOfPlayer(Tank player) {
 
         if (right.get() && !left.get()) {
             boolean collision = false;
             for (Rectangle rectangle : obstaclesMountain) {
-                if (shape.intersects(rectangle.getBoundsInParent())) collision = true;
+                if (player.getShape().intersects(rectangle.getBoundsInParent())) collision = true;
             }
             if (!collision) player.move(speed);
         } else if (left.get() && !right.get()) {
@@ -59,22 +63,46 @@ public class Gameplay {
             }
         }
         if (up.get() && !down.get()) {
-            player.tilt(-1.5);
+            player.tilt(speed);
         } else if (down.get() && !up.get()) {
-            player.tilt(1.5);
+            player.tilt(-speed);
         }
 
         if (space.get() && !bulletFired) {
             bulletFired=true;
             player.fire();
+        }
+    }
 
+    private static void movementOfComputer(Tank computer) {
+
+        if (right.get() && !left.get()) {
+            boolean collision = false;
+            for (Rectangle rectangle : obstaclesMountain) {
+                if (computer.getShape().intersects(rectangle.getBoundsInParent())) collision = true;
+            }
+            if (!collision) computer.move(speed);
+        } else if (left.get() && !right.get()) {
+            if (computer.getBodyLower().getX() > 0) {
+                computer.move(-speed);
+            }
+        }
+        if (up.get() && !down.get()) {
+            computer.tilt(speed);
+        } else if (down.get() && !up.get()) {
+            computer.tilt(-speed);
+        }
+
+        if (space.get() && !bulletFired) {
+            bulletFired=true;
+            computer.fire();
         }
     }
 
     private static void bulletBehavior(Bullet bullet) {
 
         if (bulletFired) {
-            time += 0.17;
+            time += 0.3;
             double[] position = ballPath(startX, startY, 90, toRadians((int)angle), time);
             bullet.setPosition(position[0], position[1]);
 
@@ -84,7 +112,6 @@ public class Gameplay {
                 angle = 0;
                 time = 0;
                 bullet.destroy();
-
             }
         }
     }
