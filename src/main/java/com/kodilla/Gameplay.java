@@ -86,7 +86,6 @@ public class Gameplay {
         }
     }
 
-
     private static void switchPlayer() {
 
         turnOfPlayerOne = !turnOfPlayerOne;
@@ -94,11 +93,11 @@ public class Gameplay {
 
     private static void checkWinCondition() {
 
-        if (player1.getHitPoints() <= 0) {
+        if (player1.hitPoints <= 0) {
             winner = 2;
             started = false;
         }
-        else if (player2.getHitPoints() <= 0) {
+        else if (player2.hitPoints <= 0) {
             winner = 1;
             started = false;
         }

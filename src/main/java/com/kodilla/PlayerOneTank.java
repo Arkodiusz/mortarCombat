@@ -2,9 +2,8 @@ package com.kodilla;
 
 import javafx.scene.paint.Color;
 
-import static com.kodilla.Ground.groundLeft;
-import static com.kodilla.MortarCombat.movementSpeed;
-import static com.kodilla.MortarCombat.root;
+import static com.kodilla.Ground.*;
+import static com.kodilla.MortarCombat.*;
 
 
 public class PlayerOneTank extends Tank {
@@ -14,7 +13,7 @@ public class PlayerOneTank extends Tank {
 
     public PlayerOneTank() {
 
-        reset();
+        hide();
 
         root.getChildren().add(bullet.getBody());
         root.getChildren().add(barrel);
@@ -23,6 +22,9 @@ public class PlayerOneTank extends Tank {
         root.getChildren().add(bodyLower);
 
         root.getChildren().add(bullet.explosion);
+
+        constructHpBar(50, 50);
+
     }
 
     public void reset() {
@@ -56,7 +58,9 @@ public class PlayerOneTank extends Tank {
 
         bullet.create(barrel.getHeight() / 2);
 
-        hitPoints = 100;
+        hitPoints = startHitPoints;
+        hpBar.setWidth(groundWidth);
+        hpBar.setX(50);
 
         show();
     }

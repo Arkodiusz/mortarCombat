@@ -17,6 +17,8 @@ public class Bullet {
 
     public boolean isFired = false;
 
+    private boolean damageAlreadyGiven = false;
+
     private double startX = 0;
     private double startY = 0;
     private double startAngle = 0;
@@ -68,6 +70,9 @@ public class Bullet {
             startY = 0;
             startAngle = 0;
             time = 0;
+
+            damageAlreadyGiven = false;
+
             return true;
         }
     }
@@ -137,7 +142,9 @@ public class Bullet {
 
         if (bulletInTarget(enemy)) {
 
-            enemy.decreaseHitPoints(100);
+            if (!damageAlreadyGiven) enemy.decreaseHitPoints(50);
+            damageAlreadyGiven = true;
+
             return boom();
         } else if (bulletOutOfScreen() || bulletCollisionGround()) {
 
