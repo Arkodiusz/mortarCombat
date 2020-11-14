@@ -14,13 +14,12 @@ public class MortarCombat extends Application {
     public static double resolutionWidth = 1600;
     public static double resolutionHeight = 900;
 
-    int tankHeight = 25;
-    int tankWidth = 60;
-
     public static final double movementSpeed = 1.5;
 
     public static Group root = new Group();
     public static Scene scene = new Scene(root, resolutionWidth, resolutionHeight, Color.BLACK);
+
+    public static Rectangle background;
 
     public static PlayerOneTank player1;
     public static PlayerTwoTank player2;
@@ -39,21 +38,15 @@ public class MortarCombat extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        Rectangle background = new Rectangle(resolutionWidth, resolutionHeight);
+        background = new Rectangle(resolutionWidth, resolutionHeight);
         background.setFill(Color.DEEPSKYBLUE);
         root.getChildren().add(background);
 
         generateGround();
+        sky();
 
-        player2 = new PlayerTwoTank(groundRight.getX() + groundRight.getWidth() - 100 - tankWidth,
-                groundRight.getY() - tankHeight,
-                tankWidth,
-                tankHeight);
-
-        player1 = new PlayerOneTank(groundLeft.getX() + 100,
-                groundLeft.getY() - tankHeight,
-                tankWidth,
-                tankHeight);
+        player1 = new PlayerOneTank();
+        player2 = new PlayerTwoTank();
 
         Controls.readKeyboard();
 

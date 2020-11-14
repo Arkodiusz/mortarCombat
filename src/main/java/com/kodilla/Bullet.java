@@ -13,7 +13,7 @@ public class Bullet {
 
     private Circle body = new Circle();
 
-    private Circle explosion = new Circle();
+    protected Circle explosion = new Circle();
 
     public boolean isFired = false;
 
@@ -36,9 +36,6 @@ public class Bullet {
         explosion.setFill(Color.YELLOW);
         explosion.setRadius(10);
         explosion.setOpacity(0.0);
-
-        root.getChildren().add(explosion);
-
     }
 
     public Circle getBody() {
@@ -165,6 +162,6 @@ public class Bullet {
         double newX = distX + startX;
         double newY = startY - distY;
 
-        return new double[]{newX, newY};
+        return new double[] {newX, newY};
     }
 }

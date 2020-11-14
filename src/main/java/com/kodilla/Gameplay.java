@@ -8,6 +8,7 @@ import static java.lang.Thread.sleep;
 public class Gameplay {
 
     private static boolean turnOfPlayerOne = true;
+    private static int winner = 0;
 
     public static void run() {
         Runnable updater = () -> {
@@ -68,6 +69,11 @@ public class Gameplay {
                         }
                     }
                 }
+
+                if (winner != 0) {
+                    Controls.congratulations(winner);
+                    winner = 0;
+                }
             }
         };
 
@@ -87,14 +93,17 @@ public class Gameplay {
     }
 
     private static void checkWinCondition() {
+
         if (player1.getHitPoints() <= 0) {
-
-            System.out.println("Player 2");
+            winner = 2;
             started = false;
-        } else if (player2.getHitPoints() <= 0) {
-
-            System.out.println("Player 1");
+        }
+        else if (player2.getHitPoints() <= 0) {
+            winner = 1;
             started = false;
-        } else return;
+        }
+        else winner = 0;
+
+
     }
 }

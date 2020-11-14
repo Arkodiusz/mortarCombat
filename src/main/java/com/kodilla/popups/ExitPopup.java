@@ -1,4 +1,4 @@
-package com.kodilla;
+package com.kodilla.popups;
 
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -9,9 +9,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ExitPopup {
+public class ExitPopup{
 
-    public static void show() {
+    public ExitPopup() {
 
         Stage exitPopupWindow = new Stage();
 
@@ -22,6 +22,9 @@ public class ExitPopup {
 
         Button buttonNo = new Button("NO");
         Button buttonYes = new Button("YES");
+
+        buttonNo.setMinSize(100, 50);
+        buttonYes.setMinSize(100, 50);
 
         buttonNo.setOnAction(e -> exitPopupWindow.close());
 
@@ -41,7 +44,5 @@ public class ExitPopup {
         exitPopupWindow.setScene(scene1);
 
         exitPopupWindow.showAndWait();
-
     }
-
 }

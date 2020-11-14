@@ -1,5 +1,7 @@
 package com.kodilla;
 
+import com.kodilla.popups.EndPopup;
+import com.kodilla.popups.ExitPopup;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 
@@ -40,7 +42,7 @@ public class Controls {
                 space.set(true);
             }
             if (e.getCode() == KeyCode.ESCAPE) {
-                ExitPopup.show();
+                new ExitPopup();
             }
         });
 
@@ -72,14 +74,13 @@ public class Controls {
         addButton(btnVsComputer, 2);
         addButton(btnExit, 3);
 
-
         btnVsPlayer.setOnAction(e -> {
 
             btnVsPlayer.setVisible(false);
             btnVsComputer.setVisible(false);
             btnExit.setVisible(false);
             vsComputer = false;
-            started = true;
+            startNewGame();
         });
 
         btnVsComputer.setOnAction(e -> {
@@ -88,10 +89,12 @@ public class Controls {
             btnVsComputer.setVisible(false);
             btnExit.setVisible(false);
             vsComputer = true;
-            started = true;
+            startNewGame();
         });
 
-        btnExit.setOnAction(e -> ExitPopup.show());
+        btnExit.setOnAction(e -> {
+            new ExitPopup();
+        });
     }
 
     private static void addButton(Button button, int position) {
@@ -100,5 +103,18 @@ public class Controls {
         button.setTranslateX(resolutionWidth / 2 - button.getMinWidth() / 2);
         button.setTranslateY(resolutionHeight / 2 - 100 + position * (button.getMinHeight() + 20));
         root.getChildren().add(button);
+    }
+
+    private static void startNewGame() {
+
+        started = true;
+
+        player1.reset();
+        player2.reset();
+    }
+
+    public static void congratulations(int winner) {
+
+        new EndPopup(winner);
     }
 }

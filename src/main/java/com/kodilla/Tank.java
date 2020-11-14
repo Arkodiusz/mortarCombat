@@ -14,11 +14,30 @@ public abstract class Tank {
 
     protected int hitPoints;
 
+    protected final int height = 25;
+    protected final int width = 60;
+
     protected abstract void tilt(double speed);
 
     protected abstract void fire();
 
     protected abstract void movement(boolean right, boolean left, boolean up, boolean down, boolean shoot);
+
+    public void hide() {
+
+        bodyLower.setOpacity(0.0);
+        bodyUpper.setOpacity(0.0);
+        tower.setOpacity(0.0);
+        barrel.setOpacity(0.0);
+    }
+
+    public void show() {
+
+        bodyLower.setOpacity(1.0);
+        bodyUpper.setOpacity(1.0);
+        tower.setOpacity(1.0);
+        barrel.setOpacity(1.0);
+    }
 
     protected void move(double speed) {
 
@@ -45,12 +64,12 @@ public abstract class Tank {
     }
 
     protected Shape getShape() {
+
         Shape shape = Shape.union(bodyLower, bodyUpper);
         shape = Shape.union(shape, tower);
         shape = Shape.union(shape, barrel);
         return shape;
     }
-
 
     protected int getHitPoints() {
         return hitPoints;
@@ -58,14 +77,6 @@ public abstract class Tank {
 
     protected void decreaseHitPoints(int damage) {
         hitPoints = hitPoints - damage;
-        if (getHitPoints() <= 0) destroy();
-    }
-
-    protected void destroy() {
-        bodyLower.setOpacity(0);
-        bodyUpper.setOpacity(0);
-        tower.setOpacity(0);
-        barrel.setOpacity(0);
-
+        if (getHitPoints() <= 0) hide();
     }
 }

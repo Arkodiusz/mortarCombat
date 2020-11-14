@@ -3,14 +3,32 @@ package com.kodilla;
 import javafx.scene.paint.Color;
 
 import static com.kodilla.Ground.groundRight;
-import static com.kodilla.MortarCombat.*;
+import static com.kodilla.MortarCombat.movementSpeed;
+import static com.kodilla.MortarCombat.resolutionWidth;
+import static com.kodilla.MortarCombat.root;
 
 public class PlayerTwoTank extends Tank {
 
     public final double tiltLowLimit = 0;
     public final double tiltHighLimit = 85;
 
-    public PlayerTwoTank(double x, double y, double width, double height) {
+    public PlayerTwoTank() {
+
+        reset();
+
+        root.getChildren().add(bullet.getBody());
+        root.getChildren().add(barrel);
+        root.getChildren().add(tower);
+        root.getChildren().add(bodyUpper);
+        root.getChildren().add(bodyLower);
+
+        root.getChildren().add(bullet.explosion);
+    }
+
+    public void reset() {
+
+        double x = groundRight.getX() + groundRight.getWidth() - 100 - width;
+        double y = groundRight.getY() - height;
 
         bodyLower.setWidth(1.3*width);
         bodyLower.setHeight(height*0.7);
@@ -38,14 +56,9 @@ public class PlayerTwoTank extends Tank {
 
         bullet.create(barrel.getHeight()/2);
 
-        root.getChildren().add(bullet.getBody());
-        root.getChildren().add(barrel);
-        root.getChildren().add(tower);
-        root.getChildren().add(bodyUpper);
-        root.getChildren().add(bodyLower);
-
         hitPoints = 100;
 
+        show();
     }
 
     public void tilt (double speed) {

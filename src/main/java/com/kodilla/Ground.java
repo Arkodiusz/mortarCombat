@@ -1,6 +1,7 @@
 package com.kodilla;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
@@ -113,5 +114,14 @@ public class Ground {
 
     }
 
+    public static void sky() {
+        Circle cloud1 = new Circle(500, 500, 200, Color.RED);
+
+        //root.getChildren().add(cloud1);
+
+
+        cloud1.toBack();
+        background.toBack();
+    }
 }
 

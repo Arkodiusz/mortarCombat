@@ -6,12 +6,29 @@ import static com.kodilla.Ground.groundLeft;
 import static com.kodilla.MortarCombat.movementSpeed;
 import static com.kodilla.MortarCombat.root;
 
+
 public class PlayerOneTank extends Tank {
 
     private int tiltLowLimit = -85;
     private int tiltHighLimit = 0;
 
-    public PlayerOneTank(double x, double y, double width, double height) {
+    public PlayerOneTank() {
+
+        reset();
+
+        root.getChildren().add(bullet.getBody());
+        root.getChildren().add(barrel);
+        root.getChildren().add(tower);
+        root.getChildren().add(bodyUpper);
+        root.getChildren().add(bodyLower);
+
+        root.getChildren().add(bullet.explosion);
+    }
+
+    public void reset() {
+
+        double x = groundLeft.getX() + 100;
+        double y = groundLeft.getY() - height;
 
         bodyLower.setWidth(1.3 * width);
         bodyLower.setHeight(height * 0.7);
@@ -23,6 +40,7 @@ public class PlayerOneTank extends Tank {
         tower.setCenterY(y);
         tower.setRadius(width / 4);
         tower.setFill(Color.BLACK);
+
         bodyUpper.setWidth(width / 2);
         bodyUpper.setHeight(tower.getRadius() * 2);
         bodyUpper.setX(x + (width / 6));
@@ -38,14 +56,9 @@ public class PlayerOneTank extends Tank {
 
         bullet.create(barrel.getHeight() / 2);
 
-        root.getChildren().add(bullet.getBody());
-        root.getChildren().add(barrel);
-        root.getChildren().add(tower);
-        root.getChildren().add(bodyUpper);
-        root.getChildren().add(bodyLower);
-
         hitPoints = 100;
 
+        show();
     }
 
     public void tilt(double speed) {
