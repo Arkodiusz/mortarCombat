@@ -3,19 +3,41 @@ package com.kodilla;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 import static com.kodilla.Ground.*;
 import static com.kodilla.MortarCombat.*;
+import static java.lang.Math.*;
 
 public class Bullet {
 
-    public Circle body = new Circle();
+    private Circle body = new Circle();
+
+    private Circle explosion = new Circle();
+
+    public boolean isFired = false;
+
+    private double startX = 0;
+    private double startY = 0;
+    private double startAngle = 0;
+    private double time = 0;
+
+    private int power = 90;
+    private double speed = 0.3;
 
     public void create(double size) {
 
         body.setRadius(size);
         body.setFill(Color.BLACK);
         hide();
+
+        explosion.setCenterX(0);
+        explosion.setCenterY(0);
+        explosion.setFill(Color.YELLOW);
+        explosion.setRadius(10);
+        explosion.setOpacity(0.0);
+
+        root.getChildren().add(explosion);
 
     }
 
@@ -24,11 +46,33 @@ public class Bullet {
         return body;
     }
 
-    public void destroy() {
+    private boolean boom() {
 
-        hide();
-        System.out.println("BOOM");
-        bulletFired = false;
+        body.setOpacity(0.0);
+        explosion.setCenterX(body.getCenterX());
+        explosion.setCenterY(body.getCenterY());
+        explosion.setOpacity(1.0);
+
+        if (explosion.getRadius() < 50) {
+
+            explosion.setRadius(explosion.getRadius() + 5);
+            return false;
+
+        } else {
+
+            hide();
+
+            explosion.setOpacity(0.0);
+            explosion.setRadius(10);
+            explosion.setCenterX(0);
+            explosion.setCenterY(0);
+
+            startX = 0;
+            startY = 0;
+            startAngle = 0;
+            time = 0;
+            return true;
+        }
     }
 
     public void hide() {
@@ -49,20 +93,78 @@ public class Bullet {
         body.setCenterY(y);
     }
 
-    protected boolean bulletOutOfScreen(Bullet bullet) {
-        Circle b = bullet.getBody();
-        return b.getCenterX()>resolutionWidth+100 || b.getCenterX()<-100 || b.getCenterY()>resolutionHeight+100;
+    private boolean bulletOutOfScreen() {
+
+        Circle b = getBody();
+        return b.getCenterX() > resolutionWidth + 100 || b.getCenterX() < -100 || b.getCenterY() > resolutionHeight + 100;
     }
 
-    protected boolean bulletCollisionGround(Bullet bullet) {
-        Circle b = bullet.getBody();
+    private boolean bulletCollisionGround() {
+
+        Circle b = getBody();
         boolean collision = false;
 
         for (Rectangle rectangle : obstaclesMountain) {
             if (b.intersects(rectangle.getBoundsInParent())) collision = true;
         }
-        if (b.intersects(groundLeft.getBoundsInParent()) || b.intersects(groundRight.getBoundsInParent())) collision= true;
+        if (b.intersects(groundLeft.getBoundsInParent()) || b.intersects(groundRight.getBoundsInParent()))
+            collision = true;
 
         return collision;
+    }
+
+    private boolean bulletInTarget(Tank enemy) {
+
+        Circle b = getBody();
+        Shape e = enemy.getShape();
+
+        return b.intersects(e.getBoundsInParent());
+    }
+
+    public void setStartX(double startX) {
+
+        this.startX = startX;
+    }
+
+    public void setStartY(double startY) {
+
+        this.startY = startY;
+    }
+
+    public void setStartAngle(double startAngle) {
+
+        this.startAngle = startAngle;
+    }
+
+    public boolean aimTarget(Tank enemy) {
+
+        if (bulletInTarget(enemy)) {
+
+            enemy.decreaseHitPoints(100);
+            return boom();
+        } else if (bulletOutOfScreen() || bulletCollisionGround()) {
+
+            return boom();
+        } else {
+
+            time += speed;
+            double[] position = bulletPath(startX, startY, toRadians(startAngle), time);
+            setPosition(position[0], position[1]);
+            return false;
+        }
+    }
+
+    private double[] bulletPath(double startX, double startY, double ang, double time) {
+
+        double velX = cos(ang) * power;
+        double velY = sin(ang) * power;
+
+        double distX = velX * time;
+        double distY = (velY * time) + ((-4.9 * (time * time)) / 2);
+
+        double newX = distX + startX;
+        double newY = startY - distY;
+
+        return new double[]{newX, newY};
     }
 }

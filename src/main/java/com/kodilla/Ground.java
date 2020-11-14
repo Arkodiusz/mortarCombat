@@ -11,7 +11,7 @@ import static com.kodilla.MortarCombat.*;
 
 public class Ground {
 
-    static double groundWidth = resolutionWidth / 5;
+    static double groundWidth = resolutionWidth / 6;
     public static List<Rectangle> layer1 = new ArrayList<>();
     public static List<Rectangle> layer2 = new ArrayList<>();
     public static Rectangle groundLeft = new Rectangle();
@@ -24,11 +24,11 @@ public class Ground {
 
         int tiles = 450;
         double tileWidth = resolutionWidth / tiles;
-        int iterations = (int)resolutionWidth / (int) tileWidth + 1;
+        int iterations = (int) resolutionWidth / (int) tileWidth + 1;
 
         double width;
         double height = 0;
-        double lastHeight = rand.nextInt((int)resolutionHeight / 6) + 50;
+        double lastHeight = rand.nextInt((int) resolutionHeight / 6) + 50;
         double x;
         double y;
 
@@ -39,16 +39,16 @@ public class Ground {
                 height = lastHeight;
             }
             if (i < iterations - ((iterations / 6))) {
-                height = lastHeight + 1 - rand.nextInt((int)resolutionHeight / 100);
+                height = lastHeight + 1 - rand.nextInt((int) resolutionHeight / 100);
             }
             if (i < iterations - (3 * (iterations / 6))) {
-                height = lastHeight - 1 + rand.nextInt((int)resolutionHeight / 100);
+                height = lastHeight - 1 + rand.nextInt((int) resolutionHeight / 100);
             }
             if (i < iterations - (5 * (iterations / 6))) {
                 height = lastHeight;
             }
 
-            if ( height <= 0 ) height = 1;
+            if (height <= 0) height = 1;
 
             lastHeight = height;
             x = width * i;
