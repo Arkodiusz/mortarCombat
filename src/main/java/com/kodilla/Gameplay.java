@@ -14,6 +14,8 @@ public class Gameplay {
         Runnable updater = () -> {
             if (started) {
 
+                hud.update();
+
                 if (turnOfPlayerOne) {
 
                     player1.movement(
@@ -27,6 +29,7 @@ public class Gameplay {
 
                         if (player1.bullet.aimTarget(player2)) {
 
+                            //hud.update();
                             player1.bullet.isFired = false;
                             checkWinCondition();
                             switchPlayer();
@@ -58,6 +61,8 @@ public class Gameplay {
 
                         if (player2.bullet.aimTarget(player1)) {
 
+                            //hud.update();
+
                             player2.bullet.isFired = false;
 
                             Ai.setAiNewX(0.0);
@@ -71,6 +76,7 @@ public class Gameplay {
                 }
 
                 if (winner != 0) {
+                    hud.hide();
                     Controls.congratulations(winner);
                     winner = 0;
                 }

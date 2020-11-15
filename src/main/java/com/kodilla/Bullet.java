@@ -106,11 +106,10 @@ public class Bullet {
         Circle b = getBody();
         boolean collision = false;
 
-        for (Rectangle rectangle : obstaclesMountain) {
+        for (Rectangle rectangle : layer2) {
             if (b.intersects(rectangle.getBoundsInParent())) collision = true;
         }
-        if (b.intersects(groundLeft.getBoundsInParent()) || b.intersects(groundRight.getBoundsInParent()))
-            collision = true;
+
 
         return collision;
     }
@@ -144,6 +143,8 @@ public class Bullet {
 
             if (!damageAlreadyGiven) enemy.decreaseHitPoints(50);
             damageAlreadyGiven = true;
+
+            hud.update();
 
             return boom();
         } else if (bulletOutOfScreen() || bulletCollisionGround()) {

@@ -23,14 +23,12 @@ public class PlayerOneTank extends Tank {
 
         root.getChildren().add(bullet.explosion);
 
-        constructHpBar(50, 50);
-
     }
 
     public void reset() {
 
-        double x = groundLeft.getX() + 100;
-        double y = groundLeft.getY() - height;
+        double x = 100;
+        double y = layer2.get(1).getY() - height;
 
         bodyLower.setWidth(1.3 * width);
         bodyLower.setHeight(height * 0.7);
@@ -59,8 +57,6 @@ public class PlayerOneTank extends Tank {
         bullet.create(barrel.getHeight() / 2);
 
         hitPoints = startHitPoints;
-        hpBar.setWidth(groundWidth);
-        hpBar.setX(50);
 
         show();
     }
@@ -84,7 +80,7 @@ public class PlayerOneTank extends Tank {
 
         if (right && !left) {
             if (getBodyLower().getX() + getBodyLower().getWidth() <
-                    groundLeft.getX() + groundLeft.getWidth()) {
+                    groundWidth) {
                 move(movementSpeed);
             }
         } else if (left && !right) {

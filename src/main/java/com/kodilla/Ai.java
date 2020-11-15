@@ -2,7 +2,8 @@ package com.kodilla;
 
 import java.util.Random;
 
-import static com.kodilla.Ground.groundRight;
+//import static com.kodilla.Ground.groundRight;
+import static com.kodilla.Ground.groundWidth;
 import static com.kodilla.MortarCombat.*;
 
 public class Ai {
@@ -68,10 +69,10 @@ public class Ai {
         Random rand = new Random();
         double newX = player2.getBodyLower().getX() + rand.nextInt(200) - 100;
 
-        if (newX < groundRight.getX()) {
-            newX = groundRight.getX() + 1;
-        } else if (newX + player2.getBodyLower().getWidth() > resolutionWidth) {
-            newX = resolutionWidth - 1 - player2.getBodyLower().getWidth();
+        if (newX <= resolutionWidth - groundWidth + 1) {
+            newX = resolutionWidth - groundWidth + 2;
+        } else if (newX + player2.getBodyLower().getWidth() >= resolutionWidth - 1) {
+            newX = resolutionWidth - 2 - player2.getBodyLower().getWidth();
         }
 
         return newX;

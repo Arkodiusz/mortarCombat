@@ -15,9 +15,9 @@ public class Ground {
     static double groundWidth = resolutionWidth / 6;
     public static List<Rectangle> layer1 = new ArrayList<>();
     public static List<Rectangle> layer2 = new ArrayList<>();
-    public static Rectangle groundLeft = new Rectangle();
-    public static Rectangle groundRight = new Rectangle();
-    public static List<Rectangle> obstaclesMountain = new ArrayList<>();
+    //public static Rectangle groundLeft = new Rectangle();
+    //public static Rectangle groundRight = new Rectangle();
+    //public static List<Rectangle> obstaclesMountain = new ArrayList<>();
 
     public static void generateGround() {
 
@@ -83,34 +83,32 @@ public class Ground {
         double groundLeftX = 0;
         double groundRightX = resolutionWidth - groundWidth;
 
-        //Rectangle groundLeft = new Rectangle(groundLeftX, layer2.get(1).getY(), groundWidth, layer2.get(1).getHeight());
-        groundLeft.setX(groundLeftX);
-        groundLeft.setY(layer2.get(1).getY());
-        groundLeft.setWidth(groundWidth);
-        groundLeft.setHeight(layer2.get(1).getHeight());
-        groundLeft.setFill(Color.PINK);
-        groundLeft.setOpacity(0.0);
-        root.getChildren().add(groundLeft);
+//        groundLeft.setX(groundLeftX);
+//        groundLeft.setY(layer2.get(1).getY());
+//        groundLeft.setWidth(groundWidth);
+//        groundLeft.setHeight(layer2.get(1).getHeight());
+//        groundLeft.setFill(Color.PINK);
+//        groundLeft.setOpacity(0.0);
+//        root.getChildren().add(groundLeft);
+//
+//        groundRight.setX(groundRightX);
+//        groundRight.setY(layer2.get(layer2.size() - 1).getY());
+//        groundRight.setWidth(groundWidth);
+//        groundRight.setHeight(layer2.get(layer2.size() - 1).getHeight());
+//        groundRight.setFill(Color.PINK);
+//        groundRight.setOpacity(0.0);
+//        root.getChildren().add(groundRight);
 
-        //Rectangle groundRight = new Rectangle(groundRightX, layer2.get(layer2.size() - 1).getY(), groundWidth, layer2.get(layer2.size() - 1).getHeight());
-        groundRight.setX(groundRightX);
-        groundRight.setY(layer2.get(layer2.size() - 1).getY());
-        groundRight.setWidth(groundWidth);
-        groundRight.setHeight(layer2.get(layer2.size() - 1).getHeight());
-        groundRight.setFill(Color.PINK);
-        groundRight.setOpacity(0.0);
-        root.getChildren().add(groundRight);
-
-        int i = 0;
-        for (Rectangle rectangle : layer2) {
-            if ((rectangle.getX() > resolutionWidth - 5 * (resolutionWidth / 6)) && (rectangle.getX() < resolutionWidth - (resolutionWidth / 6))) {
-                obstaclesMountain.add(new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight()));
-                obstaclesMountain.get(i).setFill(Color.YELLOW);
-                obstaclesMountain.get(i).setOpacity(0.0);
-                root.getChildren().add(obstaclesMountain.get(i));
-                i++;
-            }
-        }
+//        int i = 0;
+//        for (Rectangle rectangle : layer2) {
+//            if ((rectangle.getX() > resolutionWidth - 5 * (resolutionWidth / 6)) && (rectangle.getX() < resolutionWidth - (resolutionWidth / 6))) {
+//                obstaclesMountain.add(new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight()));
+//                obstaclesMountain.get(i).setFill(Color.YELLOW);
+//                obstaclesMountain.get(i).setOpacity(0.0);
+//                root.getChildren().add(obstaclesMountain.get(i));
+//                i++;
+//            }
+//        }
 
     }
 

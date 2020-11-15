@@ -95,6 +95,8 @@ public class Controls {
         btnExit.setOnAction(e -> {
             new ExitPopup();
         });
+
+        hud.hide();
     }
 
     private static void addButton(Button button, int position) {
@@ -108,6 +110,8 @@ public class Controls {
     private static void startNewGame() {
 
         started = true;
+
+        hud.show();
 
         player1.reset();
         player2.reset();

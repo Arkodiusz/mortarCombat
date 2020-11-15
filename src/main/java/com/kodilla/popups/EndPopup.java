@@ -19,10 +19,10 @@ public class EndPopup {
         endPopupWindow.initModality(Modality.APPLICATION_MODAL);
         endPopupWindow.setTitle("Player " + winner + "won! Congratulations!");
 
-        Label label1 = new Label("PRESS REMATCH TO PLAY AGAIN\n" +
+        Label label1 = new Label("PRESS MENU TO GO BACK\n" +
                 "    PRESS EXIT TO CLOSE GAME");
 
-        Button buttonRematch = new Button("REMATCH");
+        Button buttonRematch = new Button("MENU");
         Button buttonExit = new Button("EXIT");
 
         buttonRematch.setMinSize(100, 50);
@@ -35,8 +35,7 @@ public class EndPopup {
         });
 
         buttonExit.setOnAction(e -> {
-            Platform.exit();
-            System.exit(0);
+            new ExitPopup();
         });
 
         VBox layout = new VBox(10);

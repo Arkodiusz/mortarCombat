@@ -24,6 +24,8 @@ public class MortarCombat extends Application {
     public static PlayerOneTank player1;
     public static PlayerTwoTank player2;
 
+    public static HUD hud;
+
     public static boolean started = false;
     public static boolean vsComputer = false;
 
@@ -47,6 +49,8 @@ public class MortarCombat extends Application {
 
         player1 = new PlayerOneTank();
         player2 = new PlayerTwoTank();
+
+        hud = new HUD();
 
         Controls.readKeyboard();
 
