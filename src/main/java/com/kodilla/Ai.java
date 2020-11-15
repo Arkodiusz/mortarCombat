@@ -2,9 +2,9 @@ package com.kodilla;
 
 import java.util.Random;
 
-//import static com.kodilla.Ground.groundRight;
 import static com.kodilla.Ground.groundWidth;
 import static com.kodilla.MortarCombat.*;
+import static com.kodilla.Tank.movementSpeed;
 
 public class Ai {
 

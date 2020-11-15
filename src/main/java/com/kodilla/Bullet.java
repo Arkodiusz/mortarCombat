@@ -11,7 +11,7 @@ import static java.lang.Math.*;
 
 public class Bullet {
 
-    private Circle body = new Circle();
+    private final Circle body = new Circle();
 
     protected Circle explosion = new Circle();
 
@@ -24,8 +24,8 @@ public class Bullet {
     private double startAngle = 0;
     private double time = 0;
 
-    private int power = 90;
-    private double speed = 0.3;
+    private final int power = 90;
+    private final double speed = 0.3;
 
     public void create(double size) {
 

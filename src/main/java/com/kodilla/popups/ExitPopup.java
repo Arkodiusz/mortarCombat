@@ -9,9 +9,16 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import static com.kodilla.Gameplay.*;
+
 public class ExitPopup{
 
+    private long currentTimerCountdownValue;
+
     public ExitPopup() {
+
+        pause = true;
+        currentTimerCountdownValue = roundTimerCountdownValue;
 
         Stage exitPopupWindow = new Stage();
 
@@ -26,7 +33,11 @@ public class ExitPopup{
         buttonNo.setMinSize(100, 50);
         buttonYes.setMinSize(100, 50);
 
-        buttonNo.setOnAction(e -> exitPopupWindow.close());
+        buttonNo.setOnAction(e -> {
+            pause = false;
+            roundTimerStartValue = System.currentTimeMillis() - 1000*(roundTime - currentTimerCountdownValue);
+            exitPopupWindow.close();
+        });
 
         buttonYes.setOnAction(e -> {
             Platform.exit();

@@ -8,8 +8,8 @@ import static com.kodilla.MortarCombat.*;
 
 public class PlayerOneTank extends Tank {
 
-    private int tiltLowLimit = -85;
-    private int tiltHighLimit = 0;
+    private final int tiltLowLimit = -85;
+    private final int tiltHighLimit = 0;
 
     public PlayerOneTank() {
 

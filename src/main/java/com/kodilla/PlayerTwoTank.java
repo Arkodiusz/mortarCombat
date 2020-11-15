@@ -4,7 +4,6 @@ import javafx.scene.paint.Color;
 
 import static com.kodilla.Ground.groundWidth;
 import static com.kodilla.Ground.layer2;
-import static com.kodilla.MortarCombat.movementSpeed;
 import static com.kodilla.MortarCombat.resolutionWidth;
 import static com.kodilla.MortarCombat.root;
 

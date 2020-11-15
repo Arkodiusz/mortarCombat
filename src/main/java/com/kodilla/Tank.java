@@ -18,6 +18,8 @@ public abstract class Tank {
     protected final int height = 25;
     protected final int width = 60;
 
+    public static final double movementSpeed = 1.5;
+
     protected abstract void tilt(double speed);
 
     protected abstract void fire();

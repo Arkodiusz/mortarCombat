@@ -14,8 +14,6 @@ public class MortarCombat extends Application {
     public static double resolutionWidth = 1600;
     public static double resolutionHeight = 900;
 
-    public static final double movementSpeed = 1.5;
-
     public static Group root = new Group();
     public static Scene scene = new Scene(root, resolutionWidth, resolutionHeight, Color.BLACK);
 
@@ -56,7 +54,7 @@ public class MortarCombat extends Application {
 
         Controls.showMenu();
 
-        Thread thread = new Thread(() -> Gameplay.run());
+        Thread thread = new Thread(Gameplay::run);
         // don't let thread prevent JVM shutdown
         thread.setDaemon(true);
         thread.start();

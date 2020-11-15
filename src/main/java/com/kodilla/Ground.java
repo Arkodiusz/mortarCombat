@@ -1,7 +1,6 @@
 package com.kodilla;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
@@ -15,9 +14,6 @@ public class Ground {
     static double groundWidth = resolutionWidth / 6;
     public static List<Rectangle> layer1 = new ArrayList<>();
     public static List<Rectangle> layer2 = new ArrayList<>();
-    //public static Rectangle groundLeft = new Rectangle();
-    //public static Rectangle groundRight = new Rectangle();
-    //public static List<Rectangle> obstaclesMountain = new ArrayList<>();
 
     public static void generateGround() {
 
@@ -79,47 +75,10 @@ public class Ground {
         for (Rectangle rectangle : layer2) {
             root.getChildren().add(rectangle);
         }
-
-        double groundLeftX = 0;
-        double groundRightX = resolutionWidth - groundWidth;
-
-//        groundLeft.setX(groundLeftX);
-//        groundLeft.setY(layer2.get(1).getY());
-//        groundLeft.setWidth(groundWidth);
-//        groundLeft.setHeight(layer2.get(1).getHeight());
-//        groundLeft.setFill(Color.PINK);
-//        groundLeft.setOpacity(0.0);
-//        root.getChildren().add(groundLeft);
-//
-//        groundRight.setX(groundRightX);
-//        groundRight.setY(layer2.get(layer2.size() - 1).getY());
-//        groundRight.setWidth(groundWidth);
-//        groundRight.setHeight(layer2.get(layer2.size() - 1).getHeight());
-//        groundRight.setFill(Color.PINK);
-//        groundRight.setOpacity(0.0);
-//        root.getChildren().add(groundRight);
-
-//        int i = 0;
-//        for (Rectangle rectangle : layer2) {
-//            if ((rectangle.getX() > resolutionWidth - 5 * (resolutionWidth / 6)) && (rectangle.getX() < resolutionWidth - (resolutionWidth / 6))) {
-//                obstaclesMountain.add(new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight()));
-//                obstaclesMountain.get(i).setFill(Color.YELLOW);
-//                obstaclesMountain.get(i).setOpacity(0.0);
-//                root.getChildren().add(obstaclesMountain.get(i));
-//                i++;
-//            }
-//        }
-
     }
 
     public static void sky() {
-        Circle cloud1 = new Circle(500, 500, 200, Color.RED);
 
-        //root.getChildren().add(cloud1);
-
-
-        cloud1.toBack();
-        background.toBack();
     }
 }
 
