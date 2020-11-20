@@ -17,87 +17,77 @@ public class Gameplay {
     public static int breakElapsedTime = 0;
     private static final int breakTime = 30;
 
+    public static boolean started = false;
+    public static boolean vsComputer = false;
     public static boolean pause = false;
 
     public static void run() {
         Runnable updater = () -> {
-            if (started && !pause) {
+            if (started && !pause && !breakBetweenPlayers()) {
 
-                if (breakElapsedTime > 0 && breakElapsedTime <= breakTime) {
+                timeFlow();
 
-                    breakElapsedTime++;
+                hud.update();
 
-                    if (breakElapsedTime >= breakTime) roundTimerStartValue = System.currentTimeMillis();
+                if (turnOfPlayerOne) {
 
-                    System.out.println(breakElapsedTime);
+                    player1.movement(
+                            Controls.right.get(),
+                            Controls.left.get(),
+                            Controls.up.get(),
+                            Controls.down.get(),
+                            Controls.space.get());
+
+                    if (player1.bullet.isFired) {
+
+                        if (player1.bullet.aimTarget(player2)) {
+
+                            player1.bullet.isFired = false;
+                            checkWinCondition();
+                            switchPlayer();
+                        }
+                    }
                 } else {
 
-                    if (!player1.bullet.isFired && !player2.bullet.isFired) roundTimerCountdownValue = timerCountdown();
+                    if (vsComputer) {
+                        boolean[] commands = Ai.control();
+                        player2.movement(
+                                commands[0],
+                                commands[1],
+                                commands[2],
+                                commands[3],
+                                commands[4]);
 
-                    if (roundTimerCountdownValue == 0) switchPlayer();
 
-                    hud.update();
-
-                    if (turnOfPlayerOne) {
-
-                        player1.movement(
+                    } else {
+                        player2.movement(
                                 Controls.right.get(),
                                 Controls.left.get(),
                                 Controls.up.get(),
                                 Controls.down.get(),
                                 Controls.space.get());
-
-                        if (player1.bullet.isFired) {
-
-                            if (player1.bullet.aimTarget(player2)) {
-
-                                player1.bullet.isFired = false;
-                                checkWinCondition();
-                                switchPlayer();
-                            }
-                        }
-                    } else {
-
-                        if (vsComputer) {
-                            boolean[] commands = Ai.control();
-                            player2.movement(
-                                    commands[0],
-                                    commands[1],
-                                    commands[2],
-                                    commands[3],
-                                    commands[4]);
-
-
-                        } else {
-                            player2.movement(
-                                    Controls.right.get(),
-                                    Controls.left.get(),
-                                    Controls.up.get(),
-                                    Controls.down.get(),
-                                    Controls.space.get());
-                        }
-
-                        if (player2.bullet.isFired) {
-
-                            if (player2.bullet.aimTarget(player1)) {
-
-                                player2.bullet.isFired = false;
-
-                                Ai.setAiNewX(0.0);
-                                Ai.setAiNewAngle(0.0);
-                                Ai.setAiStep(0);
-
-                                checkWinCondition();
-                                switchPlayer();
-                            }
-                        }
                     }
 
-                    if (winner != 0) {
-                        hud.hide();
-                        Controls.congratulations(winner);
-                        winner = 0;
+                    if (player2.bullet.isFired) {
+
+                        if (player2.bullet.aimTarget(player1)) {
+
+                            player2.bullet.isFired = false;
+
+                            Ai.setAiNewX(0.0);
+                            Ai.setAiNewAngle(0.0);
+                            Ai.setAiStep(0);
+
+                            checkWinCondition();
+                            switchPlayer();
+                        }
                     }
+                }
+
+                if (winner != 0) {
+                    hud.hide();
+                    Controls.congratulations(winner);
+                    winner = 0;
                 }
             }
         };
@@ -109,6 +99,13 @@ public class Gameplay {
             }
             Platform.runLater(updater);
         }
+    }
+
+    private static void timeFlow() {
+
+        if (!player1.bullet.isFired && !player2.bullet.isFired) roundTimerCountdownValue = timerCountdown();
+
+        if (roundTimerCountdownValue == 0) switchPlayer();
     }
 
     private static void switchPlayer() {
@@ -140,5 +137,23 @@ public class Gameplay {
 
         return roundTime - ((System.currentTimeMillis() - roundTimerStartValue)/ 1000);
 
+    }
+
+    private static boolean breakBetweenPlayers() {
+
+        if ( breakElapsedTime != 0 ) {
+
+            if (breakElapsedTime <= breakTime) {
+
+                breakElapsedTime++;
+                return true;
+
+            } else {
+
+                breakElapsedTime = 0;
+                roundTimerStartValue = System.currentTimeMillis();
+            }
+        }
+        return false;
     }
 }

@@ -76,9 +76,5 @@ public class Ground {
             root.getChildren().add(rectangle);
         }
     }
-
-    public static void sky() {
-
-    }
 }
 

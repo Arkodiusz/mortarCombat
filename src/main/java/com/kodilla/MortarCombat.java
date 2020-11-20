@@ -24,9 +24,6 @@ public class MortarCombat extends Application {
 
     public static HUD hud;
 
-    public static boolean started = false;
-    public static boolean vsComputer = false;
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -34,7 +31,7 @@ public class MortarCombat extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        primaryStage.setTitle("Mortar Combat v0.1");
+        primaryStage.setTitle("Mortar Combat v1.0");
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -43,7 +40,6 @@ public class MortarCombat extends Application {
         root.getChildren().add(background);
 
         generateGround();
-        sky();
 
         player1 = new PlayerOneTank();
         player2 = new PlayerTwoTank();
@@ -55,7 +51,7 @@ public class MortarCombat extends Application {
         Controls.showMenu();
 
         Thread thread = new Thread(Gameplay::run);
-        // don't let thread prevent JVM shutdown
+
         thread.setDaemon(true);
         thread.start();
     }

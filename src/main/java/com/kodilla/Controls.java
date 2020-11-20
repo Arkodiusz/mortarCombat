@@ -7,7 +7,6 @@ import javafx.scene.input.KeyCode;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.kodilla.Gameplay.breakElapsedTime;
 import static com.kodilla.MortarCombat.*;
 
 public class Controls {
@@ -80,7 +79,7 @@ public class Controls {
             btnVsPlayer.setVisible(false);
             btnVsComputer.setVisible(false);
             btnExit.setVisible(false);
-            vsComputer = false;
+            Gameplay.vsComputer = false;
             startNewGame();
         });
 
@@ -89,7 +88,7 @@ public class Controls {
             btnVsPlayer.setVisible(false);
             btnVsComputer.setVisible(false);
             btnExit.setVisible(false);
-            vsComputer = true;
+            Gameplay.vsComputer = true;
             startNewGame();
         });
 
@@ -108,7 +107,7 @@ public class Controls {
 
     private static void startNewGame() {
 
-        started = true;
+        Gameplay.started = true;
 
         player1.reset();
         player2.reset();
@@ -117,7 +116,7 @@ public class Controls {
         hud.show();
 
         hud.hideMarker();
-        breakElapsedTime = 1;
+        Gameplay.breakElapsedTime = 1;
     }
 
     public static void congratulations(int winner) {

@@ -23,7 +23,6 @@ public class PlayerTwoTank extends Tank {
         root.getChildren().add(bodyLower);
 
         root.getChildren().add(bullet.explosion);
-
     }
 
     public void reset() {
@@ -31,40 +30,40 @@ public class PlayerTwoTank extends Tank {
         double x = resolutionWidth - 100 - width;
         double y = layer2.get(layer2.size() - 1).getY() - height;
 
-        bodyLower.setWidth(1.3*width);
-        bodyLower.setHeight(height*0.7);
+        bodyLower.setWidth(1.3 * width);
+        bodyLower.setHeight(height * 0.7);
         bodyLower.setX(x);
-        bodyLower.setY(y+height*0.3);
+        bodyLower.setY(y + height * 0.3);
         bodyLower.setFill(Color.BLACK);
 
         tower.setCenterX(x + (width / 2) + (width / 6));
         tower.setCenterY(y);
-        tower.setRadius(width/4);
+        tower.setRadius(width / 4);
         tower.setFill(Color.BLACK);
 
-        bodyUpper.setWidth(width/2);
-        bodyUpper.setHeight(tower.getRadius()*2);
+        bodyUpper.setWidth(width / 2);
+        bodyUpper.setHeight(tower.getRadius() * 2);
         bodyUpper.setX(x + bodyUpper.getWidth() + (width / 6));
-        bodyUpper.setY(y- tower.getRadius());
+        bodyUpper.setY(y - tower.getRadius());
         bodyUpper.setFill(Color.BLACK);
 
-        barrel.setWidth(tower.getRadius()*3.30);
-        barrel.setHeight(height*0.4);
-        barrel.setX(tower.getCenterX()-barrel.getWidth()/2);
-        barrel.setY(y-barrel.getHeight()/2);
+        barrel.setWidth(tower.getRadius() * 3.30);
+        barrel.setHeight(height * 0.4);
+        barrel.setX(tower.getCenterX() - barrel.getWidth() / 2);
+        barrel.setY(y - barrel.getHeight() / 2);
         barrel.setRotate(-0.0);
         barrel.setFill(Color.PURPLE);
 
-        bullet.create(barrel.getHeight()/2);
+        bullet.create(barrel.getHeight() / 2);
 
         hitPoints = startHitPoints;
 
         show();
     }
 
-    public void tilt (double speed) {
+    public void tilt(double speed) {
 
-        if ((speed>0 && barrel.getRotate()<tiltHighLimit ) || (speed<0 && barrel.getRotate()>tiltLowLimit)) {
+        if ((speed > 0 && barrel.getRotate() < tiltHighLimit) || (speed < 0 && barrel.getRotate() > tiltLowLimit)) {
             barrel.setRotate(barrel.getRotate() + speed);
         }
     }
@@ -74,7 +73,7 @@ public class PlayerTwoTank extends Tank {
         bullet.show();
         bullet.setStartX(tower.getCenterX());
         bullet.setStartY(tower.getCenterY());
-        bullet.setStartAngle(180-barrel.getRotate());
+        bullet.setStartAngle(180 - barrel.getRotate());
     }
 
 
@@ -98,7 +97,7 @@ public class PlayerTwoTank extends Tank {
         }
 
         if (shoot && !bullet.isFired) {
-            bullet.isFired =true;
+            bullet.isFired = true;
             fire();
         }
     }
