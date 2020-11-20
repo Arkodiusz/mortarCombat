@@ -39,9 +39,7 @@ public class Gameplay {
                             Controls.space.get());
 
                     if (player1.bullet.isFired) {
-
                         if (player1.bullet.aimTarget(player2)) {
-
                             player1.bullet.isFired = false;
                             checkWinCondition();
                             switchPlayer();
@@ -57,7 +55,6 @@ public class Gameplay {
                                 commands[2],
                                 commands[3],
                                 commands[4]);
-
 
                     } else {
                         player2.movement(
@@ -102,14 +99,12 @@ public class Gameplay {
     }
 
     private static void timeFlow() {
-
         if (!player1.bullet.isFired && !player2.bullet.isFired) roundTimerCountdownValue = timerCountdown();
 
         if (roundTimerCountdownValue == 0) switchPlayer();
     }
 
     private static void switchPlayer() {
-
         roundTimerCountdownValue = 0;
 
         hud.update();
@@ -120,7 +115,6 @@ public class Gameplay {
     }
 
     private static void checkWinCondition() {
-
         if (player1.hitPoints <= 0) {
             winner = 2;
             started = false;
@@ -134,22 +128,17 @@ public class Gameplay {
     }
 
     private static long timerCountdown() {
-
         return roundTime - ((System.currentTimeMillis() - roundTimerStartValue)/ 1000);
 
     }
 
     private static boolean breakBetweenPlayers() {
-
         if ( breakElapsedTime != 0 ) {
-
             if (breakElapsedTime <= breakTime) {
-
                 breakElapsedTime++;
                 return true;
 
             } else {
-
                 breakElapsedTime = 0;
                 roundTimerStartValue = System.currentTimeMillis();
             }

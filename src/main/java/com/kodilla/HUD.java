@@ -45,34 +45,25 @@ public class HUD {
         hide();
 
         constructHpBar(p1, 50, 50);
-
         constructHpBar(p2, resolutionWidth - groundWidth - 50, 50);
-
         constructTimer();
-
         constructMarker();
     }
 
     private void constructTimer() {
-
         timer.setMinSize(50,50);
-
         timer.setLayoutX(resolutionWidth/2 - timer.getMinWidth()/2 - 5);
         timer.setLayoutY(50 - p1HpBar.getHeight());
-
         timer.setFont(new Font("Arial", 50));
-
         timer.setText("");
 
         root.getChildren().add(timer);
     }
 
     private void constructMarker() {
-
         double x0p1 = resolutionWidth / 2 - 300;
         double x0p2 = resolutionWidth / 2 + 300;
         double y = 50 + p1HpBar.getHeight()/2;
-
 
         markerP1.getPoints().addAll(
                 x0p1, y,
@@ -88,11 +79,9 @@ public class HUD {
         markerP2.setFill(Color.BLACK);
 
         root.getChildren().addAll(markerP1, markerP2);
-
     }
 
     protected void constructHpBar(List<Rectangle> hpBar, double x, double y) {
-
         hpBar.get(0).setX(x - 4);
         hpBar.get(0).setY(y - 4);
         hpBar.get(0).setWidth(groundWidth + 8);
@@ -115,22 +104,18 @@ public class HUD {
         hpBar.get(2).setOpacity(0.0);
 
         for (Rectangle r : hpBar) root.getChildren().addAll(r);
-
     }
 
     public void update() {
-
         updateHpP1();
         updateHpP2();
 
         if (roundTimerCountdownValue !=0) updateMarker();
 
         updateTimer();
-
     }
 
     private void updateTimer() {
-
         String string = "";
 
         if (roundTimerCountdownValue<10) string += "0";
@@ -141,13 +126,11 @@ public class HUD {
     }
 
     private void updateHpP1() {
-
         double p1HpBarNewWidth = (double) player1.hitPoints / (double) player1.startHitPoints * groundWidth;
         p1.get(2).setWidth(p1HpBarNewWidth);
     }
 
     private void updateHpP2() {
-
         double p2HpBarNewWidth = (double) player2.hitPoints / (double) player2.startHitPoints * groundWidth;
 
         p2.get(2).setWidth(p2HpBarNewWidth);
@@ -158,7 +141,6 @@ public class HUD {
     }
 
     private void updateMarker() {
-
         if (turnOfPlayerOne) {
             markerP1.setOpacity(1.0);
             markerP2.setOpacity(0.0);
@@ -169,7 +151,6 @@ public class HUD {
     }
 
     public void hideMarker() {
-
         markerP1.setOpacity(0.0);
         markerP2.setOpacity(0.0);
 
@@ -177,7 +158,6 @@ public class HUD {
 
 
     public void show() {
-
         for (Rectangle r : p1) r.setOpacity(1.0);
         for (Rectangle r : p2) r.setOpacity(1.0);
 
@@ -185,7 +165,6 @@ public class HUD {
     }
 
     public void hide() {
-
         for (Rectangle r : p1) r.setOpacity(0.0);
         for (Rectangle r : p2) r.setOpacity(0.0);
 
@@ -193,6 +172,4 @@ public class HUD {
 
         timer.setOpacity(0.0);
     }
-
-
 }

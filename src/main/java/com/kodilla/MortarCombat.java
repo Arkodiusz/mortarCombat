@@ -30,7 +30,6 @@ public class MortarCombat extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
         primaryStage.setTitle("Mortar Combat v1.0");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -47,11 +46,9 @@ public class MortarCombat extends Application {
         hud = new HUD();
 
         Controls.readKeyboard();
-
         Controls.showMenu();
 
         Thread thread = new Thread(Gameplay::run);
-
         thread.setDaemon(true);
         thread.start();
     }

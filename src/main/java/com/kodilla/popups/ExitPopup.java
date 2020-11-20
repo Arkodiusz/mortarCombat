@@ -16,7 +16,6 @@ public class ExitPopup{
     private long currentTimerCountdownValue;
 
     public ExitPopup() {
-
         pause = true;
         currentTimerCountdownValue = roundTimerCountdownValue;
 

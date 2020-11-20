@@ -28,7 +28,6 @@ public class Bullet {
     private final double speed = 0.3;
 
     public void create(double size) {
-
         body.setRadius(size);
         body.setFill(Color.BLACK);
         hide();
@@ -41,12 +40,10 @@ public class Bullet {
     }
 
     public Circle getBody() {
-
         return body;
     }
 
     private boolean boom() {
-
         body.setOpacity(0.0);
         explosion.setCenterX(body.getCenterX());
         explosion.setCenterY(body.getCenterY());
@@ -58,7 +55,6 @@ public class Bullet {
             return false;
 
         } else {
-
             hide();
 
             explosion.setOpacity(0.0);
@@ -78,31 +74,26 @@ public class Bullet {
     }
 
     public void hide() {
-
         body.setOpacity(0.0);
         body.setCenterX(0);
         body.setCenterY(0);
     }
 
     public void show() {
-
         body.setOpacity(1.0);
     }
 
     public void setPosition(double x, double y) {
-
         body.setCenterX(x);
         body.setCenterY(y);
     }
 
     private boolean bulletOutOfScreen() {
-
         Circle b = getBody();
         return b.getCenterX() > resolutionWidth + 100 || b.getCenterX() < -100 || b.getCenterY() > resolutionHeight + 100;
     }
 
     private boolean bulletCollisionGround() {
-
         Circle b = getBody();
         boolean collision = false;
 
@@ -110,12 +101,10 @@ public class Bullet {
             if (b.intersects(rectangle.getBoundsInParent())) collision = true;
         }
 
-
         return collision;
     }
 
     private boolean bulletInTarget(Tank enemy) {
-
         Circle b = getBody();
         Shape e = enemy.getShape();
 
@@ -123,22 +112,18 @@ public class Bullet {
     }
 
     public void setStartX(double startX) {
-
         this.startX = startX;
     }
 
     public void setStartY(double startY) {
-
         this.startY = startY;
     }
 
     public void setStartAngle(double startAngle) {
-
         this.startAngle = startAngle;
     }
 
     public boolean aimTarget(Tank enemy) {
-
         if (bulletInTarget(enemy)) {
 
             if (!damageAlreadyGiven) enemy.decreaseHitPoints(50);
@@ -160,7 +145,6 @@ public class Bullet {
     }
 
     private double[] bulletPath(double startX, double startY, double ang, double time) {
-
         double velX = cos(ang) * power;
         double velY = sin(ang) * power;
 

@@ -18,7 +18,6 @@ public class Controls {
     public static AtomicReference<Boolean> space = new AtomicReference<>();
 
     public static void readKeyboard() {
-
         right.set(false);
         left.set(false);
         up.set(false);
@@ -75,7 +74,6 @@ public class Controls {
         addButton(btnExit, 3);
 
         btnVsPlayer.setOnAction(e -> {
-
             btnVsPlayer.setVisible(false);
             btnVsComputer.setVisible(false);
             btnExit.setVisible(false);
@@ -84,7 +82,6 @@ public class Controls {
         });
 
         btnVsComputer.setOnAction(e -> {
-
             btnVsPlayer.setVisible(false);
             btnVsComputer.setVisible(false);
             btnExit.setVisible(false);
@@ -106,7 +103,6 @@ public class Controls {
     }
 
     private static void startNewGame() {
-
         Gameplay.started = true;
 
         player1.reset();
@@ -120,7 +116,6 @@ public class Controls {
     }
 
     public static void congratulations(int winner) {
-
         new EndPopup(winner);
     }
 }

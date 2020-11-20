@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class EndPopup {
 
     public EndPopup(int winner) {
-
         Stage endPopupWindow = new Stage();
 
         endPopupWindow.initModality(Modality.APPLICATION_MODAL);

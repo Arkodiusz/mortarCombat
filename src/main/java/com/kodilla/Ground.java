@@ -10,13 +10,11 @@ import java.util.Random;
 import static com.kodilla.MortarCombat.*;
 
 public class Ground {
-
     static double groundWidth = resolutionWidth / 6;
     public static List<Rectangle> layer1 = new ArrayList<>();
     public static List<Rectangle> layer2 = new ArrayList<>();
 
     public static void generateGround() {
-
         Random rand = new Random();
 
         int tiles = 450;

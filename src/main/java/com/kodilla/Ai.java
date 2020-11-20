@@ -65,7 +65,6 @@ public class Ai {
     }
 
     private static double aiGetMoveStrategy() {
-
         Random rand = new Random();
         double newX = player2.getBodyLower().getX() + rand.nextInt(200) - 100;
 
@@ -79,7 +78,6 @@ public class Ai {
     }
 
     private static double aiGetTiltStrategy() {
-
         Random rand = new Random();
         double aiNewAngle = rand.nextInt(25) + 60;
 

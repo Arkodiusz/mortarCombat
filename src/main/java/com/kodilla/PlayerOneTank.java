@@ -5,14 +5,12 @@ import javafx.scene.paint.Color;
 import static com.kodilla.Ground.*;
 import static com.kodilla.MortarCombat.*;
 
-
 public class PlayerOneTank extends Tank {
 
     private final int tiltLowLimit = -85;
     private final int tiltHighLimit = 0;
 
     public PlayerOneTank() {
-
         hide();
 
         root.getChildren().add(bullet.getBody());
@@ -22,11 +20,9 @@ public class PlayerOneTank extends Tank {
         root.getChildren().add(bodyLower);
 
         root.getChildren().add(bullet.explosion);
-
     }
 
     public void reset() {
-
         double x = 100;
         double y = layer2.get(1).getY() - height;
 
@@ -62,14 +58,12 @@ public class PlayerOneTank extends Tank {
     }
 
     public void tilt(double speed) {
-
         if ((speed < 0 && barrel.getRotate() < tiltHighLimit) || (speed > 0 && barrel.getRotate() > tiltLowLimit)) {
             barrel.setRotate(barrel.getRotate() - speed);
         }
     }
 
     public void fire() {
-
         bullet.setStartX(tower.getCenterX());
         bullet.setStartY(tower.getCenterY());
         bullet.setStartAngle(-barrel.getRotate());
