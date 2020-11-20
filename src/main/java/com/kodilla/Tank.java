@@ -27,7 +27,6 @@ public abstract class Tank {
     protected abstract void movement(boolean right, boolean left, boolean up, boolean down, boolean shoot);
 
     public void hide() {
-
         bodyLower.setOpacity(0.0);
         bodyUpper.setOpacity(0.0);
         tower.setOpacity(0.0);
@@ -36,7 +35,6 @@ public abstract class Tank {
     }
 
     public void show() {
-
         bodyLower.setOpacity(1.0);
         bodyUpper.setOpacity(1.0);
         tower.setOpacity(1.0);
@@ -45,7 +43,6 @@ public abstract class Tank {
     }
 
     protected void move(double speed) {
-
         bodyLower.setX(bodyLower.getX() + speed);
         bodyUpper.setX(bodyUpper.getX() + speed);
         tower.setCenterX(tower.getCenterX() + speed);
@@ -56,20 +53,11 @@ public abstract class Tank {
         return bodyLower;
     }
 
-    protected Rectangle getBodyUpper() {
-        return bodyUpper;
-    }
-
-    protected Circle getTowerC() {
-        return tower;
-    }
-
     protected Rectangle getBarrel() {
         return barrel;
     }
 
     protected Shape getShape() {
-
         Shape shape = Shape.union(bodyLower, bodyUpper);
         shape = Shape.union(shape, tower);
         shape = Shape.union(shape, barrel);
@@ -77,12 +65,9 @@ public abstract class Tank {
     }
 
     protected void decreaseHitPoints(int damage) {
-
         hitPoints -= damage;
         if (hitPoints <= 0) destroy();
     }
-
-
 
     private void destroy() {
         hide();
