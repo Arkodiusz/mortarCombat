@@ -154,6 +154,6 @@ public class Bullet {
         double newX = distX + startX;
         double newY = startY - distY;
 
-        return new double[] {newX, newY};
+        return new double[]{newX, newY};
     }
 }

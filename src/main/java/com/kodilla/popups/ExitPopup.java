@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import static com.kodilla.Gameplay.*;
 
-public class ExitPopup{
+public class ExitPopup {
 
     private long currentTimerCountdownValue;
 
@@ -34,7 +34,7 @@ public class ExitPopup{
 
         buttonNo.setOnAction(e -> {
             pause = false;
-            roundTimerStartValue = System.currentTimeMillis() - 1000*(roundTime - currentTimerCountdownValue);
+            roundTimerStartValue = System.currentTimeMillis() - 1000 * (ROUND_TIME - currentTimerCountdownValue);
             exitPopupWindow.close();
         });
 

@@ -51,8 +51,8 @@ public class HUD {
     }
 
     private void constructTimer() {
-        timer.setMinSize(50,50);
-        timer.setLayoutX(resolutionWidth/2 - timer.getMinWidth()/2 - 5);
+        timer.setMinSize(50, 50);
+        timer.setLayoutX(resolutionWidth / 2 - timer.getMinWidth() / 2 - 5);
         timer.setLayoutY(50 - p1HpBar.getHeight());
         timer.setFont(new Font("Arial", 50));
         timer.setText("");
@@ -63,19 +63,19 @@ public class HUD {
     private void constructMarker() {
         double x0p1 = resolutionWidth / 2 - 300;
         double x0p2 = resolutionWidth / 2 + 300;
-        double y = 50 + p1HpBar.getHeight()/2;
+        double y = 50 + p1HpBar.getHeight() / 2;
 
         markerP1.getPoints().addAll(
                 x0p1, y,
-                x0p1+50, y-20,
-                x0p1+50, y+20);
+                x0p1 + 50, y - 20,
+                x0p1 + 50, y + 20);
 
         markerP1.setFill(Color.BLACK);
 
         markerP2.getPoints().addAll(
                 x0p2, y,
-                x0p2-50, y-20,
-                x0p2-50, y+20);
+                x0p2 - 50, y - 20,
+                x0p2 - 50, y + 20);
         markerP2.setFill(Color.BLACK);
 
         root.getChildren().addAll(markerP1, markerP2);
@@ -110,7 +110,7 @@ public class HUD {
         updateHpP1();
         updateHpP2();
 
-        if (roundTimerCountdownValue !=0) updateMarker();
+        if (roundTimerCountdownValue != 0) updateMarker();
 
         updateTimer();
     }
@@ -118,7 +118,7 @@ public class HUD {
     private void updateTimer() {
         String string = "";
 
-        if (roundTimerCountdownValue<10) string += "0";
+        if (roundTimerCountdownValue < 10) string += "0";
 
         string += String.valueOf(roundTimerCountdownValue);
 

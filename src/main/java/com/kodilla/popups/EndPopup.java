@@ -15,10 +15,10 @@ public class EndPopup {
         Stage endPopupWindow = new Stage();
 
         endPopupWindow.initModality(Modality.APPLICATION_MODAL);
-        endPopupWindow.setTitle("Player " + winner + "won! Congratulations!");
+        endPopupWindow.setTitle("Player " + winner + " won! Congratulations!");
 
         Label label1 = new Label("  PRESS MENU TO GO BACK\n" +
-                                      "PRESS EXIT TO CLOSE GAME");
+                "PRESS EXIT TO CLOSE GAME");
 
         Button buttonRematch = new Button("MENU");
         Button buttonExit = new Button("EXIT");
